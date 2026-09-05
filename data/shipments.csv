@@ -1,0 +1,5 @@
+
+shipment_id,supplier_id,product,quantity,expected_date
+SH001,S001,Phone Display,500,2026-09-08
+SH002,S002,Battery,300,2026-09-07
+SH003,S003,Camera Module,200,2026-09-06

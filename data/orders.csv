@@ -1,0 +1,7 @@
+
+order_id,customer,product,quantity,due_date
+O001,ABC Retail,Phone Display,80,2026-09-07
+O002,Mobile World,Phone Display,60,2026-09-08
+O003,Smart Store,Phone Display,40,2026-09-09
+O004,Tech Shop,Battery,100,2026-09-07
+O005,Digital Hub,Camera Module,50,2026-09-06

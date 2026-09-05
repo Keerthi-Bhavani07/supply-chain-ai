@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supply Chain AI Assistant</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f4f6f8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .warning {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🚚 Supply Chain AI Assistant</h1>
+
+    <p>
+        Enter a supplier disruption notice and let AI analyze
+        its supply-chain impact.
+    </p>
+
+    <form method="POST">
+
+        <textarea name="notice"
+        placeholder="Example: ABC Electronics has stopped production of Phone Display because of a manufacturing problem. The disruption is expected to last for 7 days."
+        required></textarea>
+
+        <br>
+
+        <button type="submit">Analyze Disruption</button>
+
+    </form>
+
+    {% if result %}
+
+    <div class="card">
+
+        <h2>🤖 AI Analysis</h2>
+
+        <p>
+            <strong>Detected Product:</strong>
+            {{ result.product }}
+        </p>
+
+        <p>
+            <strong>Available Stock:</strong>
+            {{ result.stock }}
+        </p>
+
+        <p>
+            <strong>Customer Demand:</strong>
+            {{ result.demand }}
+        </p>
+
+        <p class="warning">
+            Potential Shortage: {{ result.shortage }}
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📦 Affected Shipments</h2>
+
+        {% for shipment in result.shipments %}
+
+        <p>
+            {{ shipment.shipment_id }}
+            — {{ shipment.quantity }} units
+            — Expected {{ shipment.expected_date }}
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>👥 Affected Customer Orders</h2>
+
+        <table>
+
+            <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Quantity</th>
+                <th>Due Date</th>
+                <th>Urgency</th>
+            </tr>
+
+            {% for order in result.orders %}
+
+            <tr>
+                <td>{{ order.order_id }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.due_date }}</td>
+                <td>{{ order.urgency }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>💡 Recommended Actions</h2>
+
+        <ol>
+            <li>Reallocate available warehouse stock to urgent orders.</li>
+            <li>Consider expediting the delayed shipment.</li>
+            <li>Part-ship orders using available inventory.</li>
+            <li>Inform affected customers about revised delivery dates.</li>
+        </ol>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
